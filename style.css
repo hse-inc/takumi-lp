@@ -26,7 +26,7 @@
 .ph--head { inset: 0 0 auto 0; height: 58%; object-position: center top; }
 
 .page__inner--split { justify-content: space-between; gap: 1em; }
-.page__inner--work { gap: 0.7em; font-size: 0.93em; line-height: 1.7; }
+.page__inner--work { gap: 0.7em; font-size: max(var(--fs-min), 0.93em); line-height: 1.7; }
 .head { display: grid; gap: 0.6em; }
 
 .num { display: flex; align-items: baseline; gap: 0.8em; }
@@ -56,7 +56,7 @@
 }
 .band--q { margin-top: 0.5em; font-weight: 900; font-size: 1.2em; }
 
-.sheet { display: grid; gap: 0.5em; padding-left: 0.9em; font-size: 0.93em; line-height: 1.7; border-left: 1px solid var(--color-on-dark-line); }
+.sheet { display: grid; gap: 0.5em; padding-left: 0.9em; font-size: max(var(--fs-min), 0.93em); line-height: 1.7; border-left: 1px solid var(--color-on-dark-line); }
 .sheet__t--close { font-weight: 900; font-size: 1.1em; }
 
 .lead { font-weight: 900; font-size: 1.3em; line-height: var(--lh-head); letter-spacing: 0.08em; }
@@ -67,3 +67,9 @@
 
 .page--paper .page__inner { gap: 1.4em; }
 .field__hint { font-size: var(--fs-min); line-height: 1.6; color: var(--color-main-2); }
+
+@media (max-height: 620px) {
+  .page__inner--work { gap: 0.4em; line-height: 1.55; }
+  .page__inner--work .lead { font-size: 1.15em; }
+  .page__inner--work .num { display: none; }   
+}
