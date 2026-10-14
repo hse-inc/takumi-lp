@@ -13,13 +13,19 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="tokens.css?v=20261014c">
-  <link rel="stylesheet" href="base.css?v=20261014c">
-  <link rel="stylesheet" href="style.css?v=20261014c">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tokens.css?v=20261014d">
+  <link rel="stylesheet" href="base.css?v=20261014d">
+  <link rel="stylesheet" href="style.css?v=20261014d">
 </head>
 <body>
   <svg width="0" height="0" class="defs" aria-hidden="true">
+        <filter id="grit" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -5.4" result="dots"/>
+      <feComposite in="dots" in2="SourceAlpha" operator="in" result="spots"/>
+      <feComposite in="SourceGraphic" in2="spots" operator="arithmetic" k1="0" k2="1" k3="-0.55" k4="0"/>
+    </filter>
     <symbol id="ar" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
   </svg>
 
@@ -49,12 +55,12 @@
           <p class="hero__swipe" aria-hidden="true"><span>SWIPE UP</span></p>
         </section>
 
-                <section class="page page--photo" id="p1" data-tone="dark" data-label="EMPATHY" data-next="アンサー">
-          <img class="ph rv" src="assets/photo/p1-kyokan.webp" alt="" width="900" height="1612" decoding="async">
+                <section class="page page--photo page--dawn" id="p1" data-tone="dark" data-label="EMPATHY" data-next="アンサー">
+          <img class="ph" src="assets/photo/p1-kyokan.webp" alt="" width="900" height="1612" decoding="async">
           <div class="page__inner page__inner--split">
             <div class="head">
               <p class="page__label num rv" aria-hidden="true"><span class="num__k">若者の逆襲</span><span class="num__n">#01</span></p>
-              <h2 class="hd rv"><span class="wipe"><span class="ln">「まだ若いから」</span><span class="ln">そう言われたことは</span><span class="ln">ありませんか？</span></span></h2>
+              <h2 class="hd rv"><span class="type"><span class="ln">「まだ若いから」</span><span class="ln">そう言われたことは</span><span class="ln">ありませんか？</span></span></h2>
             </div>
             <div class="bands">
               <p class="band rv"><span class="wipe"><span class="band__t">「まだ若いから」と言われ、</span></span></p>
@@ -66,12 +72,12 @@
           </div>
         </section>
 
-                <section class="page page--photo page--answer" id="p2" data-tone="dark" data-label="ANSWER" data-next="仕事内容">
-          <img class="ph ph--top rv" src="assets/photo/p2-answer.webp" alt="" width="900" height="1612" decoding="async">
+                <section class="page page--photo page--answer page--tiles" id="p2" data-tone="dark" data-label="ANSWER" data-next="仕事内容">
+          <img class="ph ph--top" src="assets/photo/p2-answer.webp" alt="" width="900" height="1612" decoding="async">
           <div class="page__inner page__inner--split">
             <p class="page__label num rv" aria-hidden="true"><span class="num__k">若者の逆襲</span><span class="num__n">#02</span></p>
             <div class="head">
-              <h2 class="hd rv"><span class="wipe"><span class="ln">ここでなら、</span><span class="ln">その「若さ」が</span><span class="ln"><span class="em">強み</span>になる。</span></span></h2>
+              <h2 class="hd rv"><span class="type"><span class="ln">ここでなら、</span><span class="ln">その「若さ」が</span><span class="ln"><span class="em">強み</span>になる。</span></span></h2>
             <div class="sheet rv">
               <p class="sheet__t">当社は今<b class="kw">20代のメンバー</b>を中心に<span class="nb">生まれ変わろうとしている</span><span class="nb">「第二創業期」</span>にあります。</p>
               <p class="sheet__t">あなたのその若い「感性」や<span class="nb">若さゆえの「エネルギー」は</span><span class="nb">今まさに当社が</span><span class="nb">必要としているものです。</span></p>
@@ -81,8 +87,8 @@
           </div>
         </section>
 
-                <section class="page page--photo page--work" id="p3" data-tone="dark" data-label="WORK" data-next="募集要項">
-          <img class="ph ph--head rv" src="assets/photo/p3-work.webp" alt="" width="900" height="1260" decoding="async">
+                <section class="page page--photo page--work page--tiles" id="p3" data-tone="dark" data-label="WORK" data-next="募集要項">
+          <img class="ph ph--head" src="assets/photo/p3-work.webp" alt="" width="900" height="1260" decoding="async">
           <div class="page__inner page__inner--work">
             <p class="page__label num rv" aria-hidden="true"><span class="num__k">仕事内容</span><span class="num__n">#03</span></p>
             <p class="lead rv"><span class="wipe"><span class="ln">電気工事を中心に、</span><span class="ln">建築修繕業務や<span class="nb">緊急時の修理対応を</span><span class="nb">お任せします。</span></span></span></p>
@@ -176,6 +182,7 @@
     </aside>
   </div>
 
-  <script src="swipe.js?v=20261014c"></script>
+  <script src="swipe.js?v=20261014d"></script>
+  <script src="site.js?v=20261014d"></script>
 </body>
 </html>
