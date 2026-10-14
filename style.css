@@ -26,16 +26,25 @@
 .ph--head { inset: 0 0 auto 0; height: 58%; object-position: center top; }
 
 .page--dawn { --t0: var(--delay-type); }
-.page--dawn .ph {
-  filter: brightness(0);
-  transition: filter var(--dur-dawn) ease-in-out var(--delay-dawn), transform var(--dur-photo) var(--ease-out) var(--delay-dawn);
+
+.page--dawn .ph { transition: transform var(--dur-photo) var(--ease-out) var(--delay-dawn); }
+.shade {
+  position: absolute; inset: 0; z-index: 0; background: var(--color-main); pointer-events: none;
+  transition: opacity var(--dur-dawn) cubic-bezier(0.45, 0, 0.55, 1) var(--delay-dawn);
 }
-.page--dawn.is-active .ph { filter: brightness(1); }
+.page.is-active .shade { opacity: 0; }
 .page--dawn .num { transition-delay: calc(var(--delay-dawn) + var(--dur-dawn) - 500ms); }   
 
-.tiles { position: absolute; inset: 0; z-index: 0; display: grid; grid-template: repeat(8, 1fr) / repeat(5, 1fr); pointer-events: none; }
-.tiles i { background: var(--color-main); transition: opacity 0s linear var(--d); }
-.page.is-active .tiles i { opacity: 0; }
+.tiles {
+  position: absolute; inset: 0; z-index: 0; display: grid; pointer-events: none;
+  grid-template: repeat(var(--rows), 1fr) / repeat(var(--cols), 1fr);
+}
+.tiles i {
+  margin: -0.5px; background: var(--color-main); transform-origin: right center;
+  transition: transform 160ms cubic-bezier(0.65, 0, 0.35, 1) var(--d);
+}
+.tiles i.to-left { transform-origin: left center; }
+.page.is-active .tiles i { transform: scaleX(0); }
 
 .page--tiles { --t0: 1100ms; }
 .page--tiles .num, .page--tiles .sheet, .page--tiles .lead, .page--tiles .lead .wipe, .page--tiles .scope, .page--tiles .txt { transition-delay: 1000ms; }
@@ -56,7 +65,6 @@
   font-family: var(--font-head); font-weight: 900; font-size: 1.6em; line-height: var(--lh-head);
   letter-spacing: var(--ls-head); filter: url(#grit);
 }
-.hd--s { font-size: 1.6em; letter-spacing: 0.2em; filter: none; }
 .type { display: block; }
 
 .hd .ln {
@@ -155,9 +163,6 @@
     color: transparent; -webkit-text-stroke: 1px var(--color-line); pointer-events: none;
   }
 }
-
-.page--paper .page__inner { gap: 1.4em; }
-.field__hint { font-size: var(--fs-min); line-height: 1.6; color: var(--color-main-2); }
 
 @media (max-height: 620px) {
   .page__inner--work { gap: 0.4em; line-height: 1.55; }
