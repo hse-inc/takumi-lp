@@ -69,8 +69,40 @@
 .hd.is-on .ln { clip-path: inset(0 -0.5em 0 0); }
 
 .em {
-  display: inline-block; margin-inline: 0.08em; padding: 0 0.14em; font-size: 1.3em; line-height: 1.2;
+  position: relative; display: inline-block; margin-inline: 0.08em; padding: 0 0.14em; font-size: 1.3em; line-height: 1.2;
   color: var(--color-main); background: var(--color-on-dark);
+}
+.hd .em { --gd: calc(var(--t0, 200ms) + 3 * var(--dur-type) + 250ms); }
+.txt .em { --gd: 1500ms; }
+.em::before, .em::after {
+  content: attr(data-text); position: absolute; inset: 0; padding: 0 0.14em; pointer-events: none;
+  clip-path: inset(50% 0 50% 0);
+}
+.em::before { color: var(--color-on-dark); background: var(--color-main); }
+.em::after { color: var(--color-main); background: var(--color-on-dark); }
+.is-on .em { animation: em-shake 3.6s steps(1, end) var(--gd, 0ms) infinite; }
+.is-on .em::before { animation: em-slice-a 3.6s steps(1, end) var(--gd, 0ms) infinite; }
+.is-on .em::after { animation: em-slice-b 3.6s steps(1, end) var(--gd, 0ms) infinite; }
+@keyframes em-shake {
+  0% { transform: translate(3px, -1px); }
+  2% { transform: translate(-3px, 1px); }
+  4% { transform: translate(2px, 0); }
+  6% { transform: translate(-1px, -1px); }
+  8%, 100% { transform: none; }
+}
+@keyframes em-slice-a {
+  0% { clip-path: inset(8% 0 70% 0); transform: translateX(-6px); }
+  2% { clip-path: inset(58% 0 18% 0); transform: translateX(5px); }
+  4% { clip-path: inset(30% 0 48% 0); transform: translateX(-3px); }
+  6% { clip-path: inset(80% 0 4% 0); transform: translateX(6px); }
+  8%, 100% { clip-path: inset(50% 0 50% 0); transform: none; }
+}
+@keyframes em-slice-b {
+  0% { clip-path: inset(62% 0 12% 0); transform: translateX(5px); }
+  2% { clip-path: inset(14% 0 66% 0); transform: translateX(-6px); }
+  4% { clip-path: inset(44% 0 34% 0); transform: translateX(4px); }
+  6% { clip-path: inset(2% 0 84% 0); transform: translateX(-4px); }
+  8%, 100% { clip-path: inset(50% 0 50% 0); transform: none; }
 }
 .kw { font-weight: 700; }
 
