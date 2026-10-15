@@ -75,8 +75,8 @@
 
 .page__inner--split { justify-content: space-between; gap: 1em; }
 .page--answer .page__inner--split { justify-content: flex-end; }   
-.page__inner--work { gap: 0.35em; line-height: 1.5; letter-spacing: 0.06em; }
-.page__inner--work .scope, .page__inner--work .txt { font-size: max(var(--fs-min), 0.93em); }   
+.page__inner--work { gap: 0.6em; line-height: 1.6; letter-spacing: 0.06em; }
+.page__inner--work .scope, .page__inner--work .txt { font-size: max(var(--fs-min), 0.87em); }   
 .head { display: grid; gap: 1.1em; }
 .page__inner--work .num__n { display: none; }   
 

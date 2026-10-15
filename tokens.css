@@ -73,3 +73,14 @@
 @media (max-height: 620px) {
   :root { --fs-hd: 1.45em; }
 }
+
+@media (min-width: 960px) {
+  :root {
+    --fs-base: clamp(var(--fs-min), 2.26dvh, 18.5px);
+    --gutter: calc(var(--fs-base) * 1.73);
+    --guide-x: calc(var(--fs-base) * 0.93);
+    --frame-y: calc(var(--fs-base) * 0.93);
+    --frame-over: calc(var(--fs-base) * 1.2);
+  }
+}
+
