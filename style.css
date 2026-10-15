@@ -39,7 +39,11 @@
 }
 .page.is-active .ph { transform: none; }
 .ph--top { inset: -80px 0 auto 0; height: 75%; object-position: center 92%; }   
-.ph--work { inset: 0 0 auto 0; height: 62%; object-position: center 35%; }   
+
+.ph--work {
+  inset: auto 0 auto 0; top: min(0px, calc(23.5em - 50%)); height: auto; aspect-ratio: 900 / 1260;
+  -webkit-mask-image: linear-gradient(to bottom, var(--color-main) 62%, transparent); mask-image: linear-gradient(to bottom, var(--color-main) 62%, transparent);   
+}
 
 .page--dawn {
   --t0: var(--delay-type); --lines-delay: 2600ms;
@@ -47,7 +51,7 @@
     linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 32%),
     linear-gradient(to right, var(--color-veil) 0%, var(--color-veil) 30%, var(--color-veil-0) 58%);
 }
-.page--dawn .bands { max-width: 62%; font-size: max(var(--fs-min), 0.88em); gap: 0.2em; margin-bottom: 0.6em; }
+.page--dawn .bands { max-width: 62%; grid-template-columns: minmax(0, 1fr); font-size: max(var(--fs-min), 0.88em); gap: 0.2em; margin-bottom: 0.6em; }
 .page--dawn .band__t { line-height: 1.58; letter-spacing: 0.05em; }
 
 .page--dawn .ph { inset: 0 auto 0 12%; width: 130%; object-position: center 45%; transform-origin: right center; transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay-dawn); }
@@ -178,7 +182,13 @@
   padding: 0.3em 0.6em; line-height: 2.05; letter-spacing: var(--ls-wide); font-weight: 500;
   background: var(--color-band); -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-.band--q { margin-top: 0.6em; font-weight: 700; font-size: 1.12em; }
+
+.band--q { margin-top: 0.7em; }
+.em--q {
+  --gd: 2600ms; margin-inline: 0; padding: 0.2em 0.45em; font-family: var(--font-head); font-weight: 900; font-size: var(--fs-hd); line-height: 1.4;
+  letter-spacing: var(--ls-head); white-space: nowrap;
+}
+.em--q::before, .em--q::after { padding: 0.2em 0.45em; white-space: pre-line; }
 
 .sheet {
   position: relative; display: grid; gap: 0.6em; padding-left: 0.9em; font-size: max(var(--fs-min), 0.93em); line-height: 2;
@@ -202,7 +212,6 @@
 }
 .sheet.is-on .sheet__t--close::before, .sheet.is-on .sheet__t--close::after { transform: none; }
 
-.page__inner--work { justify-content: flex-end; }
 .lead { font-family: var(--font-head); font-weight: 900; font-size: var(--fs-hd); line-height: 1.5; letter-spacing: var(--ls-head); -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 160px; mask-size: 160px; }
 .scope { display: grid; gap: 0.35em; }
 .scope__t { justify-self: start; padding: 0 0.4em; background: var(--color-band); }
@@ -263,4 +272,6 @@
 
 @media (max-width: 370px) {
   .page__inner--work { letter-spacing: 0.03em; }
+  .em--q { letter-spacing: 0.06em; }   
+  .page--dawn .num__n { display: none; }   
 }
