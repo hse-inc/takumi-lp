@@ -6,7 +6,7 @@
 
 .page--photo { --veil: linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 34%, var(--color-veil-0) 46%, var(--color-veil) 78%); }
 .page--answer { --veil: linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 12%, var(--color-veil-0) 44%, var(--color-veil) 62%); }
-.page--work { --veil: linear-gradient(to bottom, var(--color-veil-0) 0%, var(--color-veil-0) 26%, var(--color-band) 56%, var(--color-veil) 70%); }
+.page--work { --veil: linear-gradient(to bottom, var(--color-veil-half) 0%, var(--color-veil-half) 36%, var(--color-band) 56%, var(--color-veil) 70%); }   
 .page--photo::before {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--veil);
 }
@@ -41,7 +41,7 @@
 .ph--top { inset: -80px 0 auto 0; height: 75%; object-position: center 92%; }   
 
 .ph--work {
-  inset: auto 0 auto 0; top: min(0px, calc(23.5em - 50%)); height: auto; aspect-ratio: 900 / 1260;
+  inset: auto 0 auto 0; top: calc(var(--header-h) + 4.5em - 0.574 * min(100vw, var(--col)));    height: auto; aspect-ratio: 900 / 1260;
   -webkit-mask-image: linear-gradient(to bottom, var(--color-main) 62%, transparent); mask-image: linear-gradient(to bottom, var(--color-main) 62%, transparent);   
 }
 

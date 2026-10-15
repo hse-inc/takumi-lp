@@ -17,6 +17,7 @@
   --color-band: rgb(1 1 1 / 0.8);           
   --color-veil: rgb(1 1 1 / 0.94);          
   --color-veil-0: rgb(1 1 1 / 0);
+  --color-veil-half: rgb(1 1 1 / 0.55);    
   --color-error: #010101;        
   --color-shadow: rgb(0 0 0 / 0.5);
 
