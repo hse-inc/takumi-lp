@@ -322,7 +322,7 @@
 .page--company .ph { object-position: center 30%; }
 .page--frame { --frame-c: var(--color-line); }
 
-.column.is-long:not(.is-last) .nextbtn { opacity: 1; pointer-events: auto; }
+.column.is-long.is-end:not(.is-last) .nextbtn { opacity: 1; pointer-events: auto; }
 .page--req .page__inner { padding-bottom: calc(var(--next-h) + 2.5em); }
 
 .ph-band {
