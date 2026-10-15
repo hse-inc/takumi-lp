@@ -272,6 +272,13 @@
   transform: scaleX(0); transform-origin: left; transition: transform 600ms cubic-bezier(0.7, 0, 0.3, 1) 900ms;
 }
 .hub.is-on .hub__list::before { transform: none; }
+
+.hub__list::after {
+  content: ""; position: absolute; left: 2.2em; right: 2.2em; top: calc(1.6em - 1px); height: 3px; pointer-events: none; opacity: 0;
+  background: linear-gradient(90deg, var(--color-veil-0), var(--color-on-dark), var(--color-veil-0)) 0 0 / 34% 100% no-repeat;
+}
+.hub.is-on .hub__list::after { opacity: 1; transition: opacity 300ms ease 1500ms; animation: hub-flow 2.2s cubic-bezier(0.65, 0, 0.35, 1) 1500ms infinite alternate; }
+@keyframes hub-flow { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 .hub__item {
   position: relative; display: grid; justify-items: center; gap: 0.35em; font-weight: 700; font-size: 1.12em; letter-spacing: 0.12em;
   opacity: 0; transform: translateY(1.2em) scale(0.2); transition: opacity 250ms ease, transform 600ms cubic-bezier(0.34, 1.8, 0.64, 1); transition-delay: calc(var(--i) * 130ms + 1000ms);
@@ -309,6 +316,31 @@
 .info dt { font-weight: 700; color: var(--color-on-dark-line); letter-spacing: 0.1em; }
 .info dd { font-weight: 500; letter-spacing: 0.08em; }
 .info__tel { color: inherit; font-family: var(--font-en); font-weight: 600; font-size: 1.3em; letter-spacing: 0.08em; text-decoration: none; border-bottom: 1px solid var(--color-on-dark); }
+
+.scope-ring { position: absolute; top: calc(var(--header-h) + 0.8em); right: -16%; width: 52%; aspect-ratio: 1; pointer-events: none; }
+.scope-ring::before, .scope-ring::after { content: ""; position: absolute; border-radius: 50%; }
+.scope-ring::before { inset: 0; border: 1px dashed var(--color-on-dark-line); outline: 1px solid var(--color-guide); outline-offset: 1.4em; animation: ring-spin 40s linear infinite; }
+.scope-ring::after {
+  inset: 22%; border: 1px solid var(--color-frame);
+  background:
+    linear-gradient(var(--color-frame), var(--color-frame)) center / 140% 1px no-repeat,
+    linear-gradient(var(--color-frame), var(--color-frame)) center / 1px 140% no-repeat;
+  animation: ring-spin 14s linear infinite reverse;
+}
+.page--company::after, .page--req::after, .page--entry::after {
+  position: absolute; left: 0; white-space: nowrap; pointer-events: none;
+  font-family: var(--font-en); font-style: italic; font-weight: 200; line-height: 1; letter-spacing: 0.06em;
+  color: transparent; animation: band-tick 36s linear infinite;
+}
+.page--company::after { content: "TAKUMI — ELECTRIC WORKS — HIROSHIMA — TAKUMI — ELECTRIC WORKS — HIROSHIMA — "; bottom: 0.25em; font-size: 2.4em; -webkit-text-stroke: 1px var(--color-on-dark-line); }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+@keyframes band-tick { to { transform: translateX(-50%); } }
+
+.page--req::before, .page--entry::before { content: ""; position: absolute; left: 0; right: 0; top: var(--header-h); height: 5.4em; background: var(--color-main); pointer-events: none; }
+.page--req::after, .page--entry::after { top: calc(var(--header-h) + 0.3em); font-size: 3.4em; -webkit-text-stroke: 1px var(--color-on-dark-line); }
+.page--req::after { content: "REQUIREMENTS — RECRUIT — REQUIREMENTS — RECRUIT — "; }
+.page--entry::after { content: "ENTRY — JOIN US — ENTRY — JOIN US — ENTRY — JOIN US — "; animation-direction: reverse; }
+.page--req .num, .page--entry .num { margin-top: 5em; }
 
 .page[data-tone="light"] .num__k { color: var(--color-on-dark); background: var(--color-main); }
 .page[data-tone="light"] .num__n { -webkit-text-stroke: 1px var(--color-main); }
