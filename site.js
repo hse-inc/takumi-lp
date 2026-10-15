@@ -1,8 +1,8 @@
 (() => {
   const TILE_W = 55;
   const TILE_H = 70;
-  const SPREAD_MS = 950;
-  const START_MS = 150;
+  const SPREAD_MS = 500;
+  const START_MS = 60;
   document.querySelectorAll('.page--tiles').forEach((page) => {
     const photo = page.querySelector('.ph');
     const box = photo.getBoundingClientRect();
@@ -53,7 +53,7 @@
       clearTimeout(timer);
       if (e.detail.page !== page) return;
       auto = true; set(-1);
-      timer = setTimeout(() => { set(0); play(); }, 2000);
+      timer = setTimeout(() => { set(0); play(); }, 1000);
     });
   }
 
