@@ -11,21 +11,21 @@
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--veil);
 }
 
-.page--photo {
+.page--photo, .page--frame {
   --lines-delay: 1200ms;
   --fv: calc(100% - 2 * var(--frame-y) + 2 * var(--frame-over));   
   --fw: calc(100% - 2 * var(--guide-x) + 2 * var(--frame-over));   
 }
-.page--photo::after {
+.page--photo::after, .page--frame::after {
   content: ""; position: absolute; inset: var(--header-h) 0 0 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(var(--color-frame), var(--color-frame)) left var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) right var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) left calc(var(--guide-x) - var(--frame-over)) top var(--frame-y) no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) right calc(var(--guide-x) - var(--frame-over)) bottom var(--frame-y) no-repeat;
+    linear-gradient(var(--frame-c, var(--color-frame)), var(--frame-c, var(--color-frame))) left var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
+    linear-gradient(var(--frame-c, var(--color-frame)), var(--frame-c, var(--color-frame))) right var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
+    linear-gradient(var(--frame-c, var(--color-frame)), var(--frame-c, var(--color-frame))) left calc(var(--guide-x) - var(--frame-over)) top var(--frame-y) no-repeat,
+    linear-gradient(var(--frame-c, var(--color-frame)), var(--frame-c, var(--color-frame))) right calc(var(--guide-x) - var(--frame-over)) bottom var(--frame-y) no-repeat;
   background-size: 1px 0, 1px 0, 0 1px, 0 1px;
 }
-.page--photo.is-active::after { animation: frame-draw 1000ms var(--lines-delay) both; }
+.page--photo.is-active::after, .page--frame.is-active::after { animation: frame-draw 1000ms var(--lines-delay) both; }
 @keyframes frame-draw {
   0% { background-size: 1px 0, 1px 0, 0 1px, 0 1px; animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
   30% { background-size: 1px 0, 1px 0, var(--fw) 1px, 0 1px; animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
@@ -94,7 +94,7 @@
 }
 
 .hd {
-  font-family: var(--font-head); font-weight: 900; font-size: var(--fs-hd); line-height: 1.5;
+  font-family: var(--font-head); font-weight: 700; font-size: var(--fs-hd); line-height: 1.5;   
   letter-spacing: var(--ls-head); -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 160px; mask-size: 160px;
 }
 .type { display: block; }
@@ -209,7 +209,7 @@
 }
 .sheet.is-on .sheet__t--close::before, .sheet.is-on .sheet__t--close::after { transform: none; }
 
-.lead { font-family: var(--font-head); font-weight: 900; font-size: var(--fs-hd); line-height: 1.5; letter-spacing: var(--ls-head); -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 160px; mask-size: 160px; }
+.lead { font-family: var(--font-head); font-weight: 700; font-size: var(--fs-hd); line-height: 1.5; letter-spacing: var(--ls-head); -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 160px; mask-size: 160px; }
 .scope { display: grid; gap: 0.35em; }
 .scope__t { justify-self: start; padding: 0 0.4em; background: var(--color-band); }
 .works { --p: 0; display: grid; gap: 0.55em; padding-top: 0.2em; }
@@ -280,7 +280,7 @@
 .hub.is-on .hub__list::after { opacity: 1; transition: opacity 300ms ease 1500ms; animation: hub-flow 2.2s cubic-bezier(0.65, 0, 0.35, 1) 1500ms infinite alternate; }
 @keyframes hub-flow { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 .hub__item {
-  position: relative; display: grid; justify-items: center; gap: 0.35em; font-weight: 700; font-size: 1.12em; letter-spacing: 0.12em;
+  position: relative; z-index: 1; display: grid; justify-items: center; gap: 0.35em; font-weight: 700; font-size: 1.12em; letter-spacing: 0.12em;   
   opacity: 0; transform: translateY(1.2em) scale(0.2); transition: opacity 250ms ease, transform 600ms cubic-bezier(0.34, 1.8, 0.64, 1); transition-delay: calc(var(--i) * 130ms + 1000ms);
 }
 .hub.is-on .hub__item { opacity: 1; transform: none; }
@@ -317,30 +317,13 @@
 .info dd { font-weight: 500; letter-spacing: 0.08em; }
 .info__tel { color: inherit; font-family: var(--font-en); font-weight: 600; font-size: 1.3em; letter-spacing: 0.08em; text-decoration: none; border-bottom: 1px solid var(--color-on-dark); }
 
-.scope-ring { position: absolute; top: calc(var(--header-h) + 0.8em); right: -16%; width: 52%; aspect-ratio: 1; pointer-events: none; }
-.scope-ring::before, .scope-ring::after { content: ""; position: absolute; border-radius: 50%; }
-.scope-ring::before { inset: 0; border: 1px dashed var(--color-on-dark-line); outline: 1px solid var(--color-guide); outline-offset: 1.4em; animation: ring-spin 40s linear infinite; }
-.scope-ring::after {
-  inset: 22%; border: 1px solid var(--color-frame);
-  background:
-    linear-gradient(var(--color-frame), var(--color-frame)) center / 140% 1px no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) center / 1px 140% no-repeat;
-  animation: ring-spin 14s linear infinite reverse;
+.page--company { --veil: linear-gradient(to bottom, var(--color-veil-half) 0%, var(--color-band) 40%, var(--color-veil) 85%); }
+.page--company .ph { object-position: center 30%; }
+.page--frame { --frame-c: var(--color-line); }
+.page--frame::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--color-line); opacity: 0.18;
+  -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 220px; mask-size: 220px;
 }
-.page--company::after, .page--req::after, .page--entry::after {
-  position: absolute; left: 0; white-space: nowrap; pointer-events: none;
-  font-family: var(--font-en); font-style: italic; font-weight: 200; line-height: 1; letter-spacing: 0.06em;
-  color: transparent; animation: band-tick 36s linear infinite;
-}
-.page--company::after { content: "TAKUMI — ELECTRIC WORKS — HIROSHIMA — TAKUMI — ELECTRIC WORKS — HIROSHIMA — "; bottom: 0.25em; font-size: 2.4em; -webkit-text-stroke: 1px var(--color-on-dark-line); }
-@keyframes ring-spin { to { transform: rotate(360deg); } }
-@keyframes band-tick { to { transform: translateX(-50%); } }
-
-.page--req::before, .page--entry::before { content: ""; position: absolute; left: 0; right: 0; top: var(--header-h); height: 5.4em; background: var(--color-main); pointer-events: none; }
-.page--req::after, .page--entry::after { top: calc(var(--header-h) + 0.3em); font-size: 3.4em; -webkit-text-stroke: 1px var(--color-on-dark-line); }
-.page--req::after { content: "REQUIREMENTS — RECRUIT — REQUIREMENTS — RECRUIT — "; }
-.page--entry::after { content: "ENTRY — JOIN US — ENTRY — JOIN US — ENTRY — JOIN US — "; animation-direction: reverse; }
-.page--req .num, .page--entry .num { margin-top: 5em; }
 
 .page[data-tone="light"] .num__k { color: var(--color-on-dark); background: var(--color-main); }
 .page[data-tone="light"] .num__n { -webkit-text-stroke: 1px var(--color-main); }
