@@ -51,6 +51,7 @@
     linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 30%),
     linear-gradient(to right, var(--color-band) 0%, var(--color-veil-0) 52%);   
 }
+.page--dawn .page__inner { max-height: 48em; top: max(0px, calc((100% - 48em) / 2)); }   
 .page--dawn .bands { max-width: 62%; grid-template-columns: minmax(0, 1fr); font-size: max(var(--fs-min), 0.88em); gap: 0.2em; margin-bottom: 0.6em; }
 .page--dawn .band__t { line-height: 1.58; letter-spacing: 0.05em; }
 
