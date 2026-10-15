@@ -33,13 +33,13 @@
   --fs-input: 16px;                     
   --ls-body: 0.06em;
   
-  --ls-head: 0.32em;             
+  --ls-head: 0.1em;              
   --ls-wide: 0.3em;              
   --ls-copy: 0.18em;             
   --lh-body: 1.85;
   --lh-head: 1.5;
   --lh-wide: 2.5;                
-  --skew: -11deg;                
+  --skew: -14deg;                
 
   
   --col: 480px;                  
@@ -60,8 +60,8 @@
   --dur-wipe: 1300ms;
   --dur-photo: 5500ms;
   --dur-dawn: 1600ms;            
-  --delay-dawn: 400ms;           
-  --delay-type: 1500ms;          
+  --delay-dawn: 150ms;           
+  --delay-type: 450ms;           
   --dur-type: 900ms;             
   --dur-hover: 300ms;
 }

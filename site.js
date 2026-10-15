@@ -1,7 +1,7 @@
 (() => {
-  const TILE_W = 50;
-  const TILE_H = 63;
-  const SPREAD_MS = 900;
+  const TILE_W = 98;
+  const TILE_H = 120;
+  const SPREAD_MS = 420;
   const START_MS = 150;
   document.querySelectorAll('.page--tiles').forEach((page) => {
     const photo = page.querySelector('.ph');
