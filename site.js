@@ -56,4 +56,31 @@
       timer = setTimeout(() => { set(0); play(); }, 2000);
     });
   }
+
+  const WORDS = 'REVENGE OF THE YOUNG — TAKUMI RECRUIT — ';
+  const ticker = (rail, pos) => {
+    const el = document.createElement('div');
+    el.className = pos === 'top' ? 'rail-ticker rail-ticker--top' : 'rail-ticker rail-ticker--bottom';
+    el.setAttribute('aria-hidden', 'true');
+    el.dataset.t = WORDS.repeat(2);
+    rail.append(el);
+  };
+  const left = document.querySelector('.rail--left');
+  const right = document.querySelector('.rail--right');
+  if (left) { ticker(left, 'top'); ticker(left, 'bottom'); }
+  if (right) {
+    ticker(right, 'bottom');
+    const big = document.createElement('p');
+    big.className = 'rail-big';
+    big.setAttribute('aria-hidden', 'true');
+    right.append(big);
+    const now = document.querySelector('.rail-side__now');
+    const sync = () => {
+      if (!now || big.textContent === now.textContent) return;
+      big.textContent = now.textContent;
+      big.classList.remove('is-change'); void big.offsetWidth; big.classList.add('is-change');
+    };
+    sync();
+    if (now) new MutationObserver(sync).observe(now, { childList: true, characterData: true, subtree: true });
+  }
 })();
