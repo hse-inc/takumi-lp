@@ -1,8 +1,9 @@
 (() => {
-  const TILE_W = 98;
-  const TILE_H = 120;
-  const SPREAD_MS = 420;
-  const START_MS = 150;
+  const TILE_W = 65;
+  const TILE_H = 80;
+  const SPREAD_MS = 1300;
+  const START_MS = 200;
+  const FLASH = 0.28;
   document.querySelectorAll('.page--tiles').forEach((page) => {
     const photo = page.querySelector('.ph');
     const box = photo.getBoundingClientRect();
@@ -18,7 +19,8 @@
     order.forEach((rank) => {
       const t = document.createElement('i');
       t.style.setProperty('--d', `${START_MS + Math.round((rank / (n - 1)) * SPREAD_MS)}ms`);
-      if (Math.random() < 0.5) t.className = 'to-left';
+      if (Math.random() < 0.5) t.classList.add('to-left');
+      if (Math.random() < FLASH) t.classList.add('is-flash');
       tiles.appendChild(t);
     });
     photo.after(tiles);

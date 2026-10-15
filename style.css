@@ -6,23 +6,32 @@
 
 .page--photo { --veil: linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 34%, var(--color-veil-0) 46%, var(--color-veil) 78%); }
 .page--answer { --veil: linear-gradient(to bottom, var(--color-veil) 0%, var(--color-veil-0) 14%, var(--color-veil-0) 40%, var(--color-veil) 56%); }
-.page--work { --veil: linear-gradient(to bottom, var(--color-veil-0) 8%, var(--color-veil) 42%); }
+.page--work { --veil: linear-gradient(to bottom, var(--color-veil-0) 0%, var(--color-veil-0) 22%, var(--color-band) 55%, var(--color-veil) 100%); }
 .page--photo::before {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--veil);
 }
 
-.page--photo { --lines-delay: 2300ms; }
+.page--photo {
+  --lines-delay: 2300ms;
+  --fv: calc(100% - 2 * var(--frame-y) + 2 * var(--frame-over));   
+  --fw: calc(100% - 2 * var(--guide-x) + 2 * var(--frame-over));   
+}
 .page--photo::after {
   content: ""; position: absolute; inset: var(--header-h) 0 0 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(var(--color-frame), var(--color-frame)) left var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) / 1px calc(100% - 2 * var(--frame-y) + 2 * var(--frame-over)) no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) right var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) / 1px calc(100% - 2 * var(--frame-y) + 2 * var(--frame-over)) no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) left calc(var(--guide-x) - var(--frame-over)) top var(--frame-y) / calc(100% - 2 * var(--guide-x) + 2 * var(--frame-over)) 1px no-repeat,
-    linear-gradient(var(--color-frame), var(--color-frame)) left calc(var(--guide-x) - var(--frame-over)) bottom var(--frame-y) / calc(100% - 2 * var(--guide-x) + 2 * var(--frame-over)) 1px no-repeat;
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1) var(--lines-delay);
+    linear-gradient(var(--color-frame), var(--color-frame)) left var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
+    linear-gradient(var(--color-frame), var(--color-frame)) right var(--guide-x) top calc(var(--frame-y) - var(--frame-over)) no-repeat,
+    linear-gradient(var(--color-frame), var(--color-frame)) left calc(var(--guide-x) - var(--frame-over)) top var(--frame-y) no-repeat,
+    linear-gradient(var(--color-frame), var(--color-frame)) right calc(var(--guide-x) - var(--frame-over)) bottom var(--frame-y) no-repeat;
+  background-size: 1px 0, 1px 0, 0 1px, 0 1px;
 }
-.page--photo.is-active::after { clip-path: inset(0 0 0 0); }
+.page--photo.is-active::after { animation: frame-draw 1500ms var(--lines-delay) both; }
+@keyframes frame-draw {
+  0% { background-size: 1px 0, 1px 0, 0 1px, 0 1px; animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
+  30% { background-size: 1px 0, 1px 0, var(--fw) 1px, 0 1px; animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
+  70% { background-size: 1px var(--fv), 1px var(--fv), var(--fw) 1px, 0 1px; animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
+  100% { background-size: 1px var(--fv), 1px var(--fv), var(--fw) 1px, var(--fw) 1px; }
+}
 
 .ph {
   position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
@@ -30,7 +39,7 @@
 }
 .page.is-active .ph { transform: none; }
 .ph--top { inset: -80px 0 auto 0; height: 75%; object-position: center 92%; }   
-.ph--head { inset: 0 0 auto 0; height: 58%; object-position: center top; }
+.ph--work { object-position: center 30%; }
 
 .page--dawn { --t0: var(--delay-type); --lines-delay: 2600ms; }
 
@@ -46,21 +55,35 @@
   position: absolute; inset: 0; z-index: 0; display: grid; pointer-events: none;
   grid-template: repeat(var(--rows), 1fr) / repeat(var(--cols), 1fr);
 }
-.tiles i {
-  margin: -0.5px; background: var(--color-main); transform-origin: right center;
-  transition: transform 90ms cubic-bezier(0.65, 0, 0.35, 1) var(--d);
-}
+.tiles i { margin: -0.5px; background: var(--color-main); transform-origin: right center; }
 .tiles i.to-left { transform-origin: left center; }
-.page.is-active .tiles i { transform: scaleX(0); }
+.page.is-active .tiles i { animation: tile-out 560ms linear var(--d) both; }
+.page.is-active .tiles i.is-flash { animation-name: tile-flash; }
+@keyframes tile-out {
+  0% { opacity: 1; transform: none; }
+  14% { opacity: 0.1; }
+  24% { opacity: 1; }
+  34% { opacity: 0.3; }
+  44% { opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  100% { opacity: 1; transform: scaleX(0); }
+}
+@keyframes tile-flash {
+  0% { background: var(--color-main); transform: none; }
+  12% { background: var(--color-on-dark); }
+  20% { background: var(--color-main); }
+  30% { background: var(--color-on-dark); opacity: 0.7; }
+  44% { background: var(--color-main); opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  100% { transform: scaleX(0); }
+}
 
-.page--tiles { --t0: 650ms; }
-.page--tiles .num, .page--tiles .sheet, .page--tiles .lead, .page--tiles .lead .wipe, .page--tiles .scope, .page--tiles .txt { transition-delay: 600ms; }
+.page--tiles { --t0: 2100ms; --lines-delay: 3700ms; }
+.page--tiles .num, .page--tiles .sheet, .page--tiles .lead, .page--tiles .lead .wipe, .page--tiles .scope, .page--tiles .txt, .page--tiles .flow { transition-delay: 2000ms; }
 
 .page__inner--split { justify-content: space-between; gap: 1em; }
 .page--answer .page__inner--split { justify-content: flex-end; }   
-.page__inner--work { gap: 0.6em; font-size: max(var(--fs-min), 0.93em); line-height: 1.7; letter-spacing: 0.08em; }
+.page__inner--work { gap: 0.45em; font-size: max(var(--fs-min), 0.93em); line-height: 1.6; letter-spacing: 0.06em; }
 .head { display: grid; gap: 1.1em; }
-.page__inner--work .num__n { font-size: 2.4em; }   
+.page__inner--work .num { display: none; }   
 
 .num { display: grid; justify-items: start; gap: 0.15em; }
 .num__k { font-weight: 700; font-size: var(--fs-ui); letter-spacing: var(--ls-wide); color: var(--color-on-dark-line); transform: skewX(var(--skew)); }
@@ -89,17 +112,36 @@
 
 .em {
   position: relative; display: inline-block; overflow: hidden; margin-inline: 0.08em; padding: 0 0.14em; font-size: 1.3em; line-height: 1.2;
-  color: var(--color-main); background: var(--color-on-dark); -webkit-text-stroke: 0;
+  color: transparent; -webkit-text-stroke: 0;
+  background:
+    linear-gradient(var(--color-on-dark), var(--color-on-dark)) left top no-repeat,
+    linear-gradient(var(--color-on-dark), var(--color-on-dark)) right top no-repeat,
+    linear-gradient(var(--color-on-dark), var(--color-on-dark)) right bottom no-repeat,
+    linear-gradient(var(--color-on-dark), var(--color-on-dark)) left bottom no-repeat;
+  background-size: 0 2px, 2px 0, 0 2px, 2px 0;
 }
-.hd .em { --gd: calc(var(--t0, 200ms) + 1600ms); }
-.txt .em { --gd: 1500ms; font-size: 1.12em; }
+.hd .em { --gd: calc(var(--t0, 200ms) + 1500ms); }
+.txt .em { --gd: 2800ms; font-size: 1.12em; }
 .em::before, .em::after {
   content: attr(data-text); position: absolute; inset: 0; padding: 0 0.14em; pointer-events: none;
   clip-path: inset(50% 0 50% 0);
 }
 .em::before { color: var(--color-on-dark); background: var(--color-main); }
 .em::after { color: var(--color-main); background: var(--color-on-dark); }
-.is-on .em { animation: em-shake 2.2s steps(1, end) var(--gd, 0ms) infinite; }
+.is-on .em {
+  animation:
+    em-draw 450ms linear calc(var(--gd, 0ms) - 500ms) both,
+    em-fill 1ms linear var(--gd, 0ms) both,
+    em-shake 2.2s steps(1, end) var(--gd, 0ms) infinite;
+}
+@keyframes em-draw {
+  0% { background-size: 0 2px, 2px 0, 0 2px, 2px 0; }
+  25% { background-size: 100% 2px, 2px 0, 0 2px, 2px 0; }
+  50% { background-size: 100% 2px, 2px 100%, 0 2px, 2px 0; }
+  75% { background-size: 100% 2px, 2px 100%, 100% 2px, 2px 0; }
+  100% { background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%; }
+}
+@keyframes em-fill { to { color: var(--color-main); background-color: var(--color-on-dark); } }
 .is-on .em::before { animation: em-slice-a 2.2s steps(1, end) var(--gd, 0ms) infinite; }
 .is-on .em::after { animation: em-slice-b 2.2s steps(1, end) var(--gd, 0ms) infinite; }
 @keyframes em-shake {
@@ -132,8 +174,8 @@
 .page--dawn .bands .wipe { transition-delay: 1100ms; }
 .band { position: relative; }
 .band::before {
-  content: ""; position: absolute; top: 50%; right: 100%; width: var(--gutter); height: 1px; background: var(--color-on-dark-line);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-out) 0.15s;
+  content: ""; position: absolute; top: 50%; right: 100%; width: var(--gutter); height: 1px; background: var(--color-frame);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1) 0.1s;
 }
 .band.is-on::before { transform: none; }
 .band__t {
@@ -143,21 +185,42 @@
 .band--q { margin-top: 0.6em; font-weight: 700; font-size: 1.12em; }
 
 .sheet {
-  display: grid; gap: 0.6em; padding-left: 0.9em; font-size: max(var(--fs-min), 0.93em); line-height: 2;
-  letter-spacing: 0.1em; border-left: 1px solid var(--color-frame);
+  position: relative; display: grid; gap: 0.6em; padding-left: 0.9em; font-size: max(var(--fs-min), 0.93em); line-height: 2;
+  letter-spacing: 0.1em;
 }
+.sheet::before {
+  content: ""; position: absolute; left: 0; top: -0.8em; bottom: -0.8em; width: 1px; background: var(--color-frame);
+  transform: scaleY(0); transform-origin: top; transition: transform 1100ms cubic-bezier(0.7, 0, 0.3, 1) 2300ms;
+}
+.sheet.is-on::before { transform: none; }
 .sheet__t--close { font-weight: 700; font-size: 1.08em; }
 
-.lead { font-family: var(--font-head); font-weight: 900; font-size: 1.3em; line-height: var(--lh-head); letter-spacing: 0.06em; filter: url(#grit); }
+.page__inner--work { justify-content: flex-end; }
+.lead { font-family: var(--font-head); font-weight: 900; font-size: 1.2em; line-height: var(--lh-head); letter-spacing: 0.06em; filter: url(#grit); }
 .scope { display: grid; gap: 0.35em; }
-.chips { display: flex; flex-wrap: wrap; gap: 0.4em; }
-
-.chips li {
-  padding: 0.15em 0.6em; font-weight: 500; line-height: 1.5; background: var(--color-band); border: 1px solid var(--color-on-dark-line);
-  opacity: 0; transform: translateY(0.6em);
-  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); transition-delay: calc(var(--i) * 60ms + 650ms);
+.scope__t { justify-self: start; padding: 0 0.4em; background: var(--color-band); }
+.works { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25em 0.5em; }
+.works li {
+  display: flex; align-items: center; gap: 0.45em; padding: 0.12em 0.45em; font-weight: 500; line-height: 1.35;
+  background: var(--color-band); border-left: 1px solid var(--color-frame);
+  opacity: 0; transform: translateX(-0.8em);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--i) * 110ms + 2100ms);
 }
-.scope.is-on li { opacity: 1; transform: none; }
+.scope.is-on .works li { opacity: 1; transform: none; }
+.ic {
+  flex: none; width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 90; stroke-dashoffset: 90; transition: stroke-dashoffset 1000ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 110ms + 2300ms);
+}
+.is-on .ic { stroke-dashoffset: 0; }
+.txt { justify-self: start; padding: 0.15em 0.45em; background: var(--color-band); }
+.flow { position: relative; display: flex; justify-content: space-between; padding: 0.85em 0.4em 0; }
+.flow::before {
+  content: ""; position: absolute; left: 1.4em; right: 1.4em; bottom: 1.05em; height: 1px; background: var(--color-frame);
+  transform: scaleX(0); transform-origin: left; transition: transform 1200ms cubic-bezier(0.7, 0, 0.3, 1) 2200ms;
+}
+.flow.is-on::before { transform: none; }
+.flow__s { position: relative; display: grid; place-items: center; width: 2.1em; height: 2.1em; border: 1px solid var(--color-frame); border-radius: 50%; background: var(--color-main); }
+.flow__n { position: absolute; top: -1.35em; font-family: var(--font-en); font-style: italic; font-size: var(--fs-min); line-height: 1; color: var(--color-on-dark-line); }
 .txt--close { font-weight: 700; }
 
 @media (min-width: 960px) {
@@ -179,7 +242,7 @@
   .page__inner--work { gap: 0.4em; line-height: 1.55; }
   .page__inner--work .lead { font-size: 1.15em; }
   .hd { font-size: 1.65em; }   
-  .page__inner--work .num { display: none; }   
+  .flow { display: none; }   
   .band__t { line-height: 1.8; }
   .sheet { line-height: 1.75; }
 }
