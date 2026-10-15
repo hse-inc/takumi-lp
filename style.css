@@ -323,6 +323,7 @@
 .page--frame { --frame-c: var(--color-line); }
 
 .column.is-long.is-end:not(.is-last) .nextbtn { opacity: 1; pointer-events: auto; }
+.column.is-last .nextbtn { transition: none; }   
 .page--req .page__inner { padding-bottom: calc(var(--next-h) + 2.5em); }
 
 .ph-band {

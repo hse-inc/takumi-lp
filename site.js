@@ -77,8 +77,11 @@
   const slider = document.querySelector('#slider');
   const column = document.querySelector('.column');
   if (slider && column && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver((es) => es.forEach((e) => column.classList.toggle('is-end', e.isIntersecting)), { root: slider, rootMargin: '0px 0px 40px 0px' });
-    document.querySelectorAll('.page--long .page__end').forEach((el) => io.observe(el));
+    const end = document.querySelector('#requirements .page__end');
+    let seen = false, current = '';
+    const io = new IntersectionObserver((es) => es.forEach((e) => { seen = e.isIntersecting; column.classList.toggle('is-end', seen && current === 'requirements'); }), { root: slider, rootMargin: '0px 0px 40px 0px' });
+    if (end) io.observe(end);
+    document.addEventListener('pagechange', (e) => { current = e.detail.page.id; column.classList.toggle('is-end', seen && current === 'requirements'); });
   }
 
   const WORDS = 'REVENGE OF THE YOUNG — TAKUMI RECRUIT — ';
