@@ -85,7 +85,7 @@
 .head { display: grid; gap: 1.1em; }
 .page__inner--work .num__n { display: none; }   
 
-.num { display: grid; justify-items: start; gap: 0.15em; }
+.num { display: grid; justify-items: start; gap: 0.6em; }   
 
 .num__k { padding: 0.1em 0.5em; font-weight: 700; font-size: var(--fs-ui); letter-spacing: var(--ls-wide); color: var(--color-main); background: var(--color-on-dark); transform: skewX(var(--skew)); }
 .num__n {
@@ -344,7 +344,6 @@
 .page[data-tone="light"] .num__k { color: var(--color-on-dark); background: var(--color-main); }
 .page[data-tone="light"] .num__n { -webkit-text-stroke: 1px var(--color-main); }
 .req__pay { font-family: var(--font-en); font-weight: 600; font-size: 1.3em; letter-spacing: 0.04em; }
-.field__hint { font-size: var(--fs-min); color: var(--color-main-2); }
 
 @media (min-width: 960px) {
   .rail::before {
