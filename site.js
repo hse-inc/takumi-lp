@@ -1,9 +1,9 @@
 (() => {
-  const TILE_W = 65;
-  const TILE_H = 80;
-  const SPREAD_MS = 1300;
-  const START_MS = 200;
-  const FLASH = 0.28;
+  const TILE_W = 55;
+  const TILE_H = 70;
+  const SPREAD_MS = 950;
+  const START_MS = 150;
+  const FLASH = 0.07;
   document.querySelectorAll('.page--tiles').forEach((page) => {
     const photo = page.querySelector('.ph');
     const box = photo.getBoundingClientRect();

@@ -41,9 +41,16 @@
 .ph--top { inset: -80px 0 auto 0; height: 75%; object-position: center 92%; }   
 .ph--work { object-position: center 30%; }
 
-.page--dawn { --t0: var(--delay-type); --lines-delay: 2600ms; }
+.page--dawn {
+  --t0: var(--delay-type); --lines-delay: 2600ms;
+  --veil: linear-gradient(to right, var(--color-veil) 0%, var(--color-veil) 34%, var(--color-veil-0) 64%);
+}
+.page--dawn .head, .page--dawn .bands { max-width: 62%; }
+.page--dawn .hd { font-size: 1.35em; letter-spacing: 0.08em; }
+.page--dawn .bands { font-size: max(var(--fs-min), 0.88em); gap: 0.25em; margin-bottom: 0.6em; }
+.page--dawn .band__t { line-height: 1.68; letter-spacing: 0.05em; }
 
-.page--dawn .ph { transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay-dawn); }
+.page--dawn .ph { object-position: 22% 40%; transform-origin: right center; transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay-dawn); }
 .shade {
   position: absolute; inset: 0; z-index: 0; background: var(--color-on-dark); pointer-events: none;
   transition: opacity 520ms cubic-bezier(0.5, 0, 0.75, 0) var(--delay-dawn);
@@ -57,27 +64,23 @@
 }
 .tiles i { margin: -0.5px; background: var(--color-main); transform-origin: right center; }
 .tiles i.to-left { transform-origin: left center; }
-.page.is-active .tiles i { animation: tile-out 560ms linear var(--d) both; }
+.page.is-active .tiles i { animation: tile-out 300ms linear var(--d) both; }
 .page.is-active .tiles i.is-flash { animation-name: tile-flash; }
 @keyframes tile-out {
   0% { opacity: 1; transform: none; }
-  14% { opacity: 0.1; }
-  24% { opacity: 1; }
-  34% { opacity: 0.3; }
-  44% { opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  20% { opacity: 0.55; }
+  40% { opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
   100% { opacity: 1; transform: scaleX(0); }
 }
 @keyframes tile-flash {
   0% { background: var(--color-main); transform: none; }
-  12% { background: var(--color-on-dark); }
-  20% { background: var(--color-main); }
-  30% { background: var(--color-on-dark); opacity: 0.7; }
-  44% { background: var(--color-main); opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  20% { background: var(--color-on-dark); opacity: 0.35; }
+  40% { background: var(--color-main); opacity: 1; transform: none; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
   100% { transform: scaleX(0); }
 }
 
-.page--tiles { --t0: 2100ms; --lines-delay: 3700ms; }
-.page--tiles .num, .page--tiles .sheet, .page--tiles .lead, .page--tiles .lead .wipe, .page--tiles .scope, .page--tiles .txt, .page--tiles .flow { transition-delay: 2000ms; }
+.page--tiles { --t0: 1400ms; --lines-delay: 3000ms; }
+.page--tiles .num, .page--tiles .sheet, .page--tiles .lead, .page--tiles .lead .wipe, .page--tiles .scope, .page--tiles .txt, .page--tiles .flow { transition-delay: 1300ms; }
 
 .page__inner--split { justify-content: space-between; gap: 1em; }
 .page--answer .page__inner--split { justify-content: flex-end; }   
@@ -121,7 +124,7 @@
   background-size: 0 2px, 2px 0, 0 2px, 2px 0;
 }
 .hd .em { --gd: calc(var(--t0, 200ms) + 1500ms); }
-.txt .em { --gd: 2800ms; font-size: 1.12em; }
+.txt .em { --gd: 2100ms; font-size: 1.12em; }
 .em::before, .em::after {
   content: attr(data-text); position: absolute; inset: 0; padding: 0 0.14em; pointer-events: none;
   clip-path: inset(50% 0 50% 0);
@@ -190,7 +193,7 @@
 }
 .sheet::before {
   content: ""; position: absolute; left: 0; top: -0.8em; bottom: -0.8em; width: 1px; background: var(--color-frame);
-  transform: scaleY(0); transform-origin: top; transition: transform 1100ms cubic-bezier(0.7, 0, 0.3, 1) 2300ms;
+  transform: scaleY(0); transform-origin: top; transition: transform 1100ms cubic-bezier(0.7, 0, 0.3, 1) 1600ms;
 }
 .sheet.is-on::before { transform: none; }
 .sheet__t--close { font-weight: 700; font-size: 1.08em; }
@@ -204,19 +207,19 @@
   display: flex; align-items: center; gap: 0.45em; padding: 0.12em 0.45em; font-weight: 500; line-height: 1.35;
   background: var(--color-band); border-left: 1px solid var(--color-frame);
   opacity: 0; transform: translateX(-0.8em);
-  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--i) * 110ms + 2100ms);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--i) * 110ms + 1400ms);
 }
 .scope.is-on .works li { opacity: 1; transform: none; }
 .ic {
   flex: none; width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 90; stroke-dashoffset: 90; transition: stroke-dashoffset 1000ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 110ms + 2300ms);
+  stroke-dasharray: 90; stroke-dashoffset: 90; transition: stroke-dashoffset 1000ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 110ms + 1600ms);
 }
 .is-on .ic { stroke-dashoffset: 0; }
 .txt { justify-self: start; padding: 0.15em 0.45em; background: var(--color-band); }
 .flow { position: relative; display: flex; justify-content: space-between; padding: 0.85em 0.4em 0; }
 .flow::before {
   content: ""; position: absolute; left: 1.4em; right: 1.4em; bottom: 1.05em; height: 1px; background: var(--color-frame);
-  transform: scaleX(0); transform-origin: left; transition: transform 1200ms cubic-bezier(0.7, 0, 0.3, 1) 2200ms;
+  transform: scaleX(0); transform-origin: left; transition: transform 1200ms cubic-bezier(0.7, 0, 0.3, 1) 1500ms;
 }
 .flow.is-on::before { transform: none; }
 .flow__s { position: relative; display: grid; place-items: center; width: 2.1em; height: 2.1em; border: 1px solid var(--color-frame); border-radius: 50%; background: var(--color-main); }
@@ -244,6 +247,10 @@
   .hd { font-size: 1.65em; }   
   .flow { display: none; }   
   .band__t { line-height: 1.8; }
+  .page--dawn .hd { font-size: 1.2em; }
+  .page--dawn .band__t { line-height: 1.55; }
+  .page--dawn .bands { gap: 0.2em; }
+  .page--dawn .num { display: none; }   
   .sheet { line-height: 1.75; }
 }
 
