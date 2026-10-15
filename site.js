@@ -57,6 +57,23 @@
     });
   }
 
+  document.querySelectorAll('.count').forEach((el) => {
+    const to = Number(el.dataset.to) || 0;
+    const page = el.closest('.page');
+    document.addEventListener('pagechange', (e) => {
+      if (e.detail.page !== page || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      el.classList.remove('is-pop');
+      const t0 = performance.now() + 700, dur = 900;
+      const step = (now) => {
+        const k = Math.min(1, Math.max(0, (now - t0) / dur));
+        el.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(step); else { el.textContent = String(to); el.classList.add('is-pop'); }
+      };
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    });
+  });
+
   const WORDS = 'REVENGE OF THE YOUNG — TAKUMI RECRUIT — ';
   const ticker = (rail, pos) => {
     const el = document.createElement('div');
