@@ -320,6 +320,17 @@
 .page--company { --veil: linear-gradient(to bottom, var(--color-veil-half) 0%, var(--color-band) 40%, var(--color-veil) 85%); }
 .page--company .ph { object-position: center 30%; }
 .page--frame { --frame-c: var(--color-line); }
+
+.ph-band {
+  position: absolute; top: var(--header-h); left: 0; z-index: 0; width: 100%; height: 13em; object-fit: cover; pointer-events: none;
+  filter: brightness(0.5) grayscale(0.35) contrast(1.05);
+  -webkit-mask-image: linear-gradient(to bottom, var(--color-main) 55%, transparent); mask-image: linear-gradient(to bottom, var(--color-main) 55%, transparent);
+  transform: scale(1.15); transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page.is-active .ph-band { transform: none; }
+.page--frame .num { margin-top: 6.5em; }
+.page--frame .num__k { color: var(--color-main); background: var(--color-on-dark); }
+.page--frame .num__n { -webkit-text-stroke: 1px var(--color-on-dark); }
 .page--frame::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--color-line); opacity: 0.18;
   -webkit-mask-image: var(--grit); mask-image: var(--grit); -webkit-mask-size: 220px; mask-size: 220px;
